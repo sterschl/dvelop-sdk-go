@@ -1,3 +1,3 @@
 module github.com/sterschl/dvelop-sdk-go/jsonlog
 
-go 1.17
+go 1.12
