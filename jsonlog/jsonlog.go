@@ -23,7 +23,7 @@ func New(out io.Writer) *Logger {
 	return &Logger{
 		out:  out,
 		time: time.Now,
-		writeMessage: func(e *Event) ([]byte, error) {
+		writeMessage: func(e *Event, msg string) ([]byte, error) {
 			json, err := e.MarshalJSON()
 			if err != nil {
 				return nil, err
@@ -61,8 +61,7 @@ func (l *Logger) Print(ctx context.Context, sev Severity, v ...interface{}) {
 
 	var o []LogOption
 	for i := len(v); i > 0; i-- {
-		d, e := v[len(v)-1].(LogOption)
-		if e {
+		if d, found := v[len(v)-1].(LogOption); found {
 			v = v[:len(v)-1]
 			o = append(o, d)
 		}
@@ -75,8 +74,7 @@ func (l *Logger) Printf(ctx context.Context, sev Severity, format string, v ...i
 
 	var o []LogOption
 	for i := len(v); i > 0; i-- {
-		d, e := v[len(v)-1].(LogOption)
-		if e {
+		if d, found := v[len(v)-1].(LogOption); found {
 			v = v[:len(v)-1]
 			o = append(o, d)
 		}
@@ -152,7 +150,7 @@ func (l *Logger) writeOutput(ctx context.Context, sev Severity, msg string, opti
 		o(&e)
 	}
 
-	o, err := l.writeMessage(&e)
+	o, err := l.writeMessage(&e, msg)
 	if err == nil {
 		l.out.Write(o)
 	}
