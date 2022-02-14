@@ -3,7 +3,7 @@ package jsonlog_test
 import (
 	"bytes"
 	"context"
-	log "github.com/d-velop/dvelop-sdk-go/jsonlog"
+	log "github.com/sterschl/dvelop-sdk-go/jsonlog"
 	"testing"
 	"time"
 )

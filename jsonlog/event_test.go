@@ -2,7 +2,7 @@ package jsonlog_test
 
 import (
 	"encoding/json"
-	log "github.com/d-velop/dvelop-sdk-go/jsonlog"
+	log "github.com/sterschl/dvelop-sdk-go/jsonlog"
 	"net/http"
 	"strings"
 	"testing"
