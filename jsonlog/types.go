@@ -19,6 +19,8 @@ func WithName(name string) LogOption {
 	}
 }
 
+// with resouce??
+
 func WithVisibility(vis bool) LogOption {
 	return func(e *Event) {
 		if !vis {
